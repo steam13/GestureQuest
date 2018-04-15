@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">GestureQuest</string>
+    <string name="add">Добавить</string>
+    <string name="done">Готово</string>
+    <string name="search_menu_title">Search</string>
+    <string name="settings_gesture">Жест для входа в настройки</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="undefined">Не определен</string>
+    <string name="unlock_gesture">Жест для разблокировки замка</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="edit_settings_gestrue">Изменить</string>
+    <string name="gesture_accuracy">Требуемая точность жестов</string>
+</resources>
