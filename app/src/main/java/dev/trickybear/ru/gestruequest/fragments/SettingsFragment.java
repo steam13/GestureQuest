@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -28,6 +29,7 @@ public class SettingsFragment extends Fragment {
     private ImageView gestureImagePreview;
     private LinearLayout unlockContainer;
     private LinearLayout unlockUndefinedContainer;
+    private CheckBox waitCommandCheck;
     private Gesture unlockGesture;
     private MainActivity mainActivity;
 
@@ -45,6 +47,8 @@ public class SettingsFragment extends Fragment {
         unlockUndefinedContainer = view.findViewById(R.id.ll_unlock_undefined_container);
         gestureAccuracyBar = view.findViewById(R.id.sb_accuracy);
         gestureImagePreview = view.findViewById(R.id.iv_unlock_preview);
+        waitCommandCheck = view.findViewById(R.id.chb_wait_command);
+        waitCommandCheck.setChecked(Consts.isWaitingCommand);
 
         view.findViewById(R.id.btn_unlock_add).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +68,8 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Consts.accuracy = gestureAccuracyBar.getProgress();
+                Consts.isWaitingCommand = waitCommandCheck.isChecked();
+                mainActivity.saveWaitCommand(waitCommandCheck.isChecked());
                 mainActivity.goBack();
             }
         });

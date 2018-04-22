@@ -84,6 +84,14 @@
             android:layout_height="wrap_content"
             android:max="90" />
 
+        <CheckBox
+            android:id="@+id/chb_wait_command"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/wait_command"
+            android:textColor="@color/gray_color" />
+
         <Button
             android:id="@+id/btn_bluetooth_dg"
             android:layout_width="120dp"

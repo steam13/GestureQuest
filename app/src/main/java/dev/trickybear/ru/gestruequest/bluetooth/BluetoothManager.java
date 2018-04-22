@@ -27,8 +27,8 @@ public class BluetoothManager {
         bluetoothController.setBluetoothListener(listener);
     }
 
-    public void connect(BluetoothDevice bluetoothDevice) {
-        bluetoothController.connect(bluetoothDevice.getAddress());
+    public void connect(String bluetoothDevice) {
+        bluetoothController.connect(bluetoothDevice);
     }
 
     public BluetoothDevice getConnectedDevice() {

@@ -20,4 +20,5 @@
     <string name="not_connected_status">Не подключен</string>
     <string name="yes">ДА</string>
     <string name="no">НЕТ</string>
+    <string name="wait_command">Ждать команды на определение</string>
 </resources>

@@ -116,7 +116,7 @@ class BluetoothDevicesAdapter extends RecyclerView.Adapter<BluetoothDevicesAdapt
                         .show();
             }
             else {
-                GestureQuest.getBluetoothService().connectBluetoothDevice(bluetoothDevice);
+                GestureQuest.getBluetoothService().connectBluetoothDevice(bluetoothDevice.getAddress());
             }
         }
     }

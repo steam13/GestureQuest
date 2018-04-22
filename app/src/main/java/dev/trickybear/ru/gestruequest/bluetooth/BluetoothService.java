@@ -56,7 +56,7 @@ public class BluetoothService {
         return bluetoothManager.cancelScan();
     }
 
-    public void connectBluetoothDevice(BluetoothDevice device) {
+    public void connectBluetoothDevice(String device) {
         bluetoothManager.cancelScan();
         bluetoothManager.disconnect();
         bluetoothManager.connect(device);

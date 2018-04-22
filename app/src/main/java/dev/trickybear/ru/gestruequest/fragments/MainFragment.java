@@ -133,7 +133,8 @@ public class MainFragment extends Fragment implements OnGesturePerformedListener
     public void onGesturePerformed(GestureOverlayView overlay, Gesture gesture) {
         ArrayList<Prediction> predictions = gestureLib.recognize(gesture);
         Log.d(TAG, "recog thayu");
-        if (isRecognizeAvailable && predictions != null && predictions.size() > 0 && (predictions.get(0)).score > Consts.accuracy) {
+        if ((isRecognizeAvailable || !Consts.isWaitingCommand) && predictions != null
+                && predictions.size() > 0 && (predictions.get(0)).score > Consts.accuracy) {
             gestureOverlay.setGestureVisible(false);
             resultImageView.setAlpha(0.0f);
             resultImageView.setVisibility(View.VISIBLE);

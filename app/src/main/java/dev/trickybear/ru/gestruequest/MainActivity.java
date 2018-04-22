@@ -5,8 +5,10 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,6 +36,8 @@ import dev.trickybear.ru.gestruequest.fragments.SettingsFragment;
 public class MainActivity extends AppCompatActivity {
     private static final int BLUETOOTH_ENABLE_REQUEST_CODE = 1;
     private static final String BLUETOOTH_DIALOG_KEY = "bt_dialog";
+    private static final String BT_ADDRESS = "bt_address";
+    private static final String WAIT_COMMAND = "wait";
 
     private View decorView;
     private FragmentManager fragmentManager;
@@ -43,10 +47,12 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothDevicesDialog bluetoothDevicesDialog;
     private boolean isConnected = false;
     private Timer connectionTimer;
+    private SharedPreferences sharedPref;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedPref = getPreferences(Context.MODE_PRIVATE);
         decorView = getWindow().getDecorView();
         fragmentManager = getFragmentManager();
         mainFragment = new MainFragment();
@@ -89,6 +95,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         hideSystemUI();
+        Consts.isWaitingCommand = getWaitCommand();
+        if (GestureQuest.getBluetoothService().isBluetoothAvailable() && !isConnected && getLastDevice() != null) {
+            new Handler().postDelayed(
+                    new Runnable() {
+                        public void run() {
+                            GestureQuest.getBluetoothService().connectBluetoothDevice(getLastDevice());
+                        }
+                    }, 3L * 1000);
+        }
     }
 
     public void showMainFragment() {
@@ -120,6 +135,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void hideSystemUI() {
         decorView.setSystemUiVisibility(5894);
+    }
+
+    public void saveBluetoothDevice(String address) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(BT_ADDRESS, address);
+        editor.commit();
+    }
+
+    public void saveWaitCommand(boolean wait) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(WAIT_COMMAND, wait);
+        editor.commit();
+    }
+
+    public String getLastDevice() {
+        return sharedPref.getString(BT_ADDRESS, null);
+    }
+
+    public boolean getWaitCommand() {
+        return sharedPref.getBoolean(WAIT_COMMAND, false);
     }
 
     private Handler.Callback bluetoothCallback = new Handler.Callback() {
@@ -154,11 +189,21 @@ public class MainActivity extends AppCompatActivity {
                         if (connectionTimer != null) {
                             connectionTimer.cancel();
                             connectionTimer.purge();
+
+                            new Handler().postDelayed(
+                                    new Runnable() {
+                                        public void run() {
+                                            if (getLastDevice() != null)
+                                                GestureQuest.getBluetoothService().connectBluetoothDevice(getLastDevice());
+                                        }
+                                    }, 3L * 1000);
                         }
 
                     } else if (state == State.STATE_CONNECTED) {
                         bluetoothDevicesDialog.notifyConnectionStateChanged();
                         isConnected = true;
+                        saveBluetoothDevice(GestureQuest.getBluetoothService().getConnectedDevice().getAddress());
+                        Toast.makeText(getApplicationContext(), GestureQuest.getBluetoothService().getConnectedDevice().getName(), Toast.LENGTH_SHORT).show();
                         connectionTimer = new Timer();
                         connectionTimer.schedule(new TimerTask() {
                             @Override
