@@ -1,4 +1,4 @@
-package dev.trickybear.ru.gesturequest;
+package dev.trickybear.ru.gestruequest;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

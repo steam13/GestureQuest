@@ -3,4 +3,29 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGray">#505050</color>
+
+    <color name="bottom_menu_background">#212121</color>
+    <color name="accent_for_edit_text">#1e000000</color>
+
+    <color name="shadow_gray_color">#d3d3d3</color>
+    <color name="gray_color">#525252</color>
+    <color name="gray_with_opacity">#de525252</color>
+    <color name="background_color">#fafafa</color>
+    <color name="settings_item_delimiter">#eaeaea</color>
+    <color name="settings_title_text_color">#ececec</color>
+
+    <color name="light_gold_color">#e3d9cc</color>
+    <color name="gold_color">#b1905d</color>
+    <color name="gold_color_with_opacity">#deb1905d</color>
+    <color name="gold_color_with_strong_opacity">#b5bda683</color>
+
+    <color name="confirm_color">#e56a6a</color>
+
+    <color name="text_color_with_opacity">#8a525252</color>
+    <color name="black_color_with_opacity">#89000000</color>
+
 </resources>

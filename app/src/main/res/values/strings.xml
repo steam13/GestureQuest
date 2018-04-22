@@ -12,4 +12,12 @@
     <string name="edit_settings_gestrue">Изменить</string>
     <string name="gesture_accuracy">Требуемая точность жестов</string>
     <string name="bluetooth">Bluetooth</string>
+    <string name="bt_device_connect">Bluetooth</string>
+    <string name="connect">ПОДКЛЮЧИТЬСЯ</string>
+    <string name="disconnect">ОТКЛЮЧИТЬСЯ</string>
+    <string name="disconnect_from_monitor">Вы действительно ххотите отключиться?</string>
+    <string name="connected_status">Подключен</string>
+    <string name="not_connected_status">Не подключен</string>
+    <string name="yes">ДА</string>
+    <string name="no">НЕТ</string>
 </resources>

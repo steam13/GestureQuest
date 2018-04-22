@@ -1,0 +1,51 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="delimiter_height">2dp</dimen>
+
+    <!-- main fragment -->
+    <dimen name="bottom_menu_height">64dp</dimen>
+    <dimen name="order_layout_width">408dp</dimen>
+    <dimen name="settings_button_padding">16dp</dimen>
+    <dimen name="grid_view_spacing">16dp</dimen>
+
+    <dimen name="item_width">198dp</dimen>
+    <dimen name="item_height">154dp</dimen>
+    <dimen name="back_button_height">120dp</dimen>
+
+    <!--settings dialog-->
+    <dimen name="settings_dialog_width">600dp</dimen>
+    <dimen name="settings_dialog_height">264dp</dimen>
+    <dimen name="settings_dialog_item_height">64dp</dimen>
+
+    <!--monitor pop-->
+    <dimen name="monitor_pop_width">416dp</dimen>
+    <dimen name="monitor_pop_height">536dp</dimen>
+    <dimen name="connect_button_width">256dp</dimen>
+    <dimen name="connect_button_height">72dp</dimen>
+
+    <!--order layout-->
+    <dimen name="order_item_height">96dp</dimen>
+    <dimen name="product_card_width">616dp</dimen>
+    <dimen name="product_card_title_height">168dp</dimen>
+    <dimen name="product_card_buttons_width">268dp</dimen>
+    <dimen name="product_card_buttons_height">72dp</dimen>
+
+    <!--auth fragment-->
+    <dimen name="auth_layout_width">312dp</dimen>
+    <dimen name="auth_layout_top_padding">232dp</dimen>
+
+    <!--order dialogs-->
+    <dimen name="order_status_dialog_width">416dp</dimen>
+    <dimen name="order_status_dialog_height">536dp</dimen>
+    <dimen name="order_status_icon_size">196dp</dimen>
+    <dimen name="try_again_button_width">256dp</dimen>
+    <dimen name="try_again_button_height">72dp</dimen>
+    <dimen name="tips_dialog_width">500dp</dimen>
+    <dimen name="tips_dialog_height">472dp</dimen>
+
+    <dimen name="total_price_dialog_width">856dp</dimen>
+    <dimen name="total_price_dialog_height">472dp</dimen>
+</resources>
