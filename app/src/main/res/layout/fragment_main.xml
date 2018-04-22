@@ -3,7 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#000">
+    android:background="#b40909">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NOT FOR COMMERCIAL USE. ONLY FOR TESTING"
+        android:textSize="50sp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
 
     <android.gesture.GestureOverlayView
         android:id="@+id/gestures"
