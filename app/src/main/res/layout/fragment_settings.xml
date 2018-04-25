@@ -82,7 +82,7 @@
             style="@style/Widget.AppCompat.SeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:max="90" />
+            android:max="50" />
 
         <CheckBox
             android:id="@+id/chb_wait_command"

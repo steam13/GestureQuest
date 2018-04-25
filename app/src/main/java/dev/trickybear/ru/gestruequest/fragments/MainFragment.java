@@ -26,10 +26,11 @@ import dev.trickybear.ru.gestruequest.GestureQuest;
 import dev.trickybear.ru.gestruequest.MainActivity;
 import dev.trickybear.ru.gestruequest.R;
 import dev.trickybear.ru.gestruequest.bluetooth.Action;
+import dev.trickybear.ru.gestruequest.utils.DrawingPanel;
 import dev.trickybear.ru.gestruequest.utils.GestureImageUtils;
 
 
-public class MainFragment extends Fragment implements OnGesturePerformedListener {
+public class MainFragment extends Fragment implements OnGesturePerformedListener, DrawingPanel.SettingsCallback {
     public static final String TAG = "MainFragment";
     private CountDownTimer countDownTimer;
     private int counter = 0;
@@ -38,8 +39,9 @@ public class MainFragment extends Fragment implements OnGesturePerformedListener
     private ImageView resultImageView;
     private Gesture unlockGesture;
     private MainActivity mainActivity;
-    private boolean isRecognizeAvailable = false;
+    private boolean isRecognizeAvailable = !Consts.isWaitingCommand;
     private Handler unlockedStateHandler;
+    private DrawingPanel drawingPanel;
 
 
     @Nullable
@@ -53,6 +55,8 @@ public class MainFragment extends Fragment implements OnGesturePerformedListener
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         resultImageView = view.findViewById(R.id.iv_result);
         resultImageView.setVisibility(View.INVISIBLE);
+        drawingPanel = view.findViewById(R.id.draw_panel);
+        drawingPanel.setCallback(this);
 
         gestureOverlay = view.findViewById(R.id.gestures);
         gestureOverlay.addOnGesturePerformedListener(this);
@@ -83,9 +87,9 @@ public class MainFragment extends Fragment implements OnGesturePerformedListener
             @Override
             public boolean onLongClick(View v) {
                 Log.d(TAG, "onLongClick: " + counter);
-                if (counter > 9) {
+                if (drawingPanel.getCounter() > 9) {
                     mainActivity.showSettingsFragment();
-                } else if (counter > 3) {
+                } else if (drawingPanel.getCounter() > 3) {
                     resultImageView.animate().alpha(0.0f).setDuration(300).setListener(new AnimatorListener() {
                         @Override
                         public void onAnimationStart(Animator animation) {
@@ -133,19 +137,24 @@ public class MainFragment extends Fragment implements OnGesturePerformedListener
     public void onGesturePerformed(GestureOverlayView overlay, Gesture gesture) {
         ArrayList<Prediction> predictions = gestureLib.recognize(gesture);
         Log.d(TAG, "recog thayu");
-        if ((isRecognizeAvailable || !Consts.isWaitingCommand) && predictions != null
+
+        if (isRecognizeAvailable && predictions != null
                 && predictions.size() > 0 && (predictions.get(0)).score > Consts.accuracy) {
-            gestureOverlay.setGestureVisible(false);
+            gestureOverlay.setGestureVisible(true);
             resultImageView.setAlpha(0.0f);
             resultImageView.setVisibility(View.VISIBLE);
             resultImageView.setImageBitmap(GestureImageUtils.toBitmap(resultImageView, unlockGesture));
+            //resultImageView.setImageBitmap(toBmp(resultImageView.getWidth(),resultImageView.getHeight(),0,-16711936));
             resultImageView.animate().alpha(1.0f).setDuration(300).setListener(null);
             GestureQuest.getBluetoothService().sendAction(Action.UNLOCKED);
+            isRecognizeAvailable = false;
             unlockedStateHandler = new Handler();
             unlockedStateHandler.postDelayed(
                     new Runnable() {
                         public void run() {
+                            isRecognizeAvailable = !Consts.isWaitingCommand;
                             gestureOverlay.setGestureVisible(true);
+                            drawingPanel.setVisibility(View.VISIBLE);
                             resultImageView.setVisibility(View.INVISIBLE);
                         }
                     }, 60L * 1000 * 15);
@@ -162,9 +171,37 @@ public class MainFragment extends Fragment implements OnGesturePerformedListener
             unlockedStateHandler.removeCallbacksAndMessages(null);
             gestureOverlay.setGestureVisible(true);
             resultImageView.setVisibility(View.INVISIBLE);
-            isRecognizeAvailable = false;
+            isRecognizeAvailable = !Consts.isWaitingCommand;
         }
     }
 
+    @Override
+    public void openSettings() {
+        mainActivity.showSettingsFragment();
+    }
 
+    @Override
+    public void hideResult() {
+        resultImageView.animate().alpha(0.0f).setDuration(300).setListener(new AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                restart();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+    }
 }

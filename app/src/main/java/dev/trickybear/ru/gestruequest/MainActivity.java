@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
                             public void run() {
                                 GestureQuest.getBluetoothService().sendAction(Action.PING);
                             }
-                        }, 5000L, 60L * 1000 * 5); // each 5 minutes
+                        }, 5000L, 30L * 1000); // each 30 sec
                     }
                     return true;
 

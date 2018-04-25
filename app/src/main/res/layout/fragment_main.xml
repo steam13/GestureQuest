@@ -2,30 +2,31 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#b40909">
+    android:background="#000000">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="NOT FOR COMMERCIAL USE. ONLY FOR TESTING"
-        android:textSize="50sp"
-        android:gravity="center"
-        android:layout_gravity="center"/>
 
     <android.gesture.GestureOverlayView
         android:id="@+id/gestures"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:eventsInterceptionEnabled="false"
         android:fadeEnabled="true"
         android:fadeOffset="500"
+        android:gestureColor="#00000000"
         android:gestureStrokeType="single"
-        android:gestureStrokeWidth="16.0"/>
+        android:gestureStrokeWidth="16.0"
+        android:uncertainGestureColor="#00000000">
+
+        <dev.trickybear.ru.gestruequest.utils.DrawingPanel
+            android:id="@+id/draw_panel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.gesture.GestureOverlayView>
+
 
     <ImageView
         android:id="@+id/iv_result"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"/>
+        android:scaleType="center" />
 </FrameLayout>

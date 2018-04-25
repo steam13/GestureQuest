@@ -7,6 +7,7 @@
     <color name="colorRed">#FF0000</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGray">#505050</color>
+    <color name="colorYellow">#f4d300</color>
 
     <color name="bottom_menu_background">#212121</color>
     <color name="accent_for_edit_text">#1e000000</color>
